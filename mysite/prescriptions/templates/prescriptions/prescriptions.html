@@ -1,0 +1,37 @@
+{% extends "prescriptions/base.html" %}
+
+{% block title %}Prescription List{% endblock %}
+
+{% block content %}
+
+<h2>Prescription List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Prescription ID</th>
+            <th>Items</th>
+            <th>Quantities</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td>{{ prescription.id }}</td>
+            <td>
+                <ul>{% for quantity in prescription.quantity_set.all %}
+                    <li>{{ quantity.drug.drug_name }}</li>
+                    {% endfor %}</ul>
+            </td>
+            <td>
+                <ul>{% for quantity in prescription.quantity_set.all %}
+                    <li>{{ quantity.quantity }}</li>
+                    {% endfor %}</ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}
